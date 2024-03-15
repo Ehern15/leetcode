@@ -9,11 +9,10 @@ var longestConsecutive = function(nums) {
         map1.set(nums[i],nums[i]);
     }
     for (let index = 0; index < map1.size ; index++) {
-        if(map1.get(index) + 1 == map1.get(index + 1) || map1.get(index) == map1.get(index))
+        if(map1.get(index - 1) === (map1.get(index) - 1) || map1.get(index + 1) === (map1.get(index) + 1))
             map2.set(map1.get(index));      
         
     }
-    console.log(map2)
     return map2.size;
 };
 
