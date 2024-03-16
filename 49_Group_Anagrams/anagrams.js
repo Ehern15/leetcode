@@ -19,19 +19,16 @@ var groupAnagrams = function (strs) {
 
         if (map1.has(hashkey)) {
             value = map1.get(hashkey);
-            value.push(strs[i])
-            map1.set(hashkey, value);
-        } else {
-            value.push(strs[i]);
-            map1.set(hashkey, value);
         }
+        value.push(strs[i]);
+        map1.set(hashkey, value);
 
     }
     let solution = new Array();
     const buildSolution = (value) => solution.push(value);
-    
+
     map1.forEach(buildSolution)
-    
+
     return solution;
 
 };
