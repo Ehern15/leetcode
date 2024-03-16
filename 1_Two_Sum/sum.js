@@ -5,7 +5,7 @@
  */
 var twoSum = function(nums, target) {
     for(let i = 0; i < nums.length; i++){
-        for(let j = 0; j < nums.length; j++){
+        for(let j = i + 1; j < nums.length; j++){
             if(target == nums[i] + nums[j] && i != j){
                 const newArr = new Array(i,j);
                 return newArr;
