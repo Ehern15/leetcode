@@ -4,7 +4,7 @@ var MinStack = function() {
     this.minStack = [];
     this.min = undefined;
 };
-
+//each node has a minimum value for the stack as it currently is
 /** 
  * @param {number} val
  * @return {void}
@@ -17,7 +17,7 @@ MinStack.prototype.push = function(val) {
         this.min = val;
     }
     
-    
+    this.minStack.push(this.min);
     this.stack.push(val);
 };
 
@@ -25,9 +25,11 @@ MinStack.prototype.push = function(val) {
  * @return {void}
  */
 MinStack.prototype.pop = function() {
-    if(this.min == this.stack.pop()){
-        this.min = this.minStack.pop();
+    this.minStack.pop();
+    if(this.stack.pop() == this.min){
+        this.min == this.minStack[this.minStack.length-1];
     }
+    
 };
 
 /**
@@ -41,7 +43,7 @@ MinStack.prototype.top = function() {
  * @return {number}
  */
 MinStack.prototype.getMin = function() {
-    return this.min;
+    return this.minStack[this.minStack.length-1];
 };
 
 /** 
