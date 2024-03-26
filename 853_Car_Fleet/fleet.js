@@ -5,33 +5,24 @@
  * @return {number}
  */
 var carFleet = function (target, position, speed) {
-    
+
     let cars = [];
-    let arrival = [];
-
-    for (let i = 0; i < position.length; i++) {
-        arrival[i] = (target - position[i]) / speed[i];
-    }
-
     for (let i = 0; i < position.length; i++) {
         let temp = []
         temp.push(position[i]);
-        temp.push(arrival[i]);
+        temp.push((target - position[i]) / speed[i]);
         cars[i] = temp;
     }
     cars.sort((a, b) => b[0] - a[0]);
-    let fleets = [];
-    
+    let current = -1;
+    let fleets = 0;
     for (let i = 0; i < position.length; i++) {
-        if(i == 0){
-            fleets.push(cars[i][1]);
-            continue;
-        }
-        if(cars[i][1] > fleets[fleets.length - 1]){
-            fleets.push(cars[i][1]);
+        if (current < cars[i][1]) {
+            current = cars[i][1]
+            fleets++;
         }
     }
-    return fleets.length;  
+    return fleets;
 };
 
 let target = 10, position = [3], speed = [3];
