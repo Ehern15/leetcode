@@ -2,31 +2,28 @@
  * @param {number[]} heights
  * @return {number}
  */
-var largestRectangleArea = function(heights) {
+var largestRectangleArea = function (heights) {
+    let stack = [];
     let max = 0;
-    let temp = 0;
-    for(let i = 0;i < heights.length;i++){
-        if(heights[i+1] >= heights[i]){
-            temp = heights[i] + heights[i];
+    heights.push(0);
+    for(let i = 0; i < heights.length;i++){
+        let start = i;
+        while(stack.length && stack[stack.length - 1][1] > heights[i]){
+            let [index,height] = stack.pop();
+            max = Math.max(max, (i - index) * height)
+            start = index;
         }
-        if(max < temp){
-            max = temp;
-        }
-        if(heights[i] == 1){
-            temp = heights.length;
-        }
+        stack.push([start, heights[i]]);
     }
-    temp = 0;
-    for(let i = 0;i < heights.length;i++){
-        temp = heights[i];
-        if(max < temp){
-            max = temp;
-        }
-    }
-
     return max;
 };
-let heights = [2,1,5,6,2,3]
+let heights = [1,2,3,4,5];
+console.log(largestRectangleArea(heights));
+heights = [2, 1, 5, 6, 2, 3]
 console.log(largestRectangleArea(heights))
-heights = [2,4]
+heights = [2, 4]
+console.log(largestRectangleArea(heights))
+heights = [1,2,2];
+console.log(largestRectangleArea(heights))
+heights = [2,1,2];
 console.log(largestRectangleArea(heights))
