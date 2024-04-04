@@ -6,19 +6,29 @@ var threeSum = function(nums) {
     let map = new Map();
     for(let i = 0; i < nums.length; i++){
         if(map.has(nums[i])){
-            map.get()
+            let temp1 = map.get(nums[i]);
+            temp1.push(i);
+        }else{
+            map.set(nums[i],[i])
         }
-        map.set( )
     }
-    console.log(map);
     let answer = [];
     for(let i = 0; i < nums.length; i++){
         for(let j = i + 1; j < nums.length;j++){
-            if(map.has(-(nums[i] + nums[j]))) {
-                answer.push([nums[i],nums[j],map.get(-(nums[i] + nums[j]))]);
-            } 
+
+            if(map.has(0 - (nums[i] + nums[j]))) {
+                let temp1 = map.get(0 - (nums[i] + nums[j]));
+                if(temp1.length > 0){
+                    
+                }
+                
+                
+                answer.push([nums[i],nums[j],nums[temp1.pop()]]);
+            }
         }
     }
+    console.log(map)
+    return answer;
 };
 let nums = [-1,0,1,2,-1,-4];
 console.log(threeSum(nums));
