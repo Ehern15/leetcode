@@ -3,28 +3,37 @@
  * @return {number[][]}
  */
 var threeSum = function (nums) {
+    let answer = [];
+    if(nums.length < 3){
+        return answer;
+    }
     if(nums.length == 3){
         return nums;
     }
-    let map = new Map();
-    for(let i = 0; i < nums.length; i++){
-        if(map.has(nums[i])){
-            let temp = map.get(nums[i]);
-            temp.push(i);
-        }else{
-            map.set(nums[i],[i])
+    nums = nums.sort((a, b) => a - b);
+
+    for (let i = 0; i < nums.length - 2; i++){
+        if(nums[i] > 0){
+            break;
         }
-    }
-    for(let i = 0;i < nums.length;i++){
-        if(map.get(nums[i]) == []){continue;}
-        for(let j = 0;j < nums.length;j++){
-            if(map.get(nums[j])){
-                
+        if(i > 0 && nums[i] === nums[i-1]){
+            continue;
+        }
+        for(let j = i + 1, k = nums.length - 1; j < k;){
+            let sum = nums[i] + nums[j] + nums[k];
+            if(0 == sum){
+                answer.push([nums[i],nums[j],nums[k]]);
+                while(nums[k] == nums[k-1]){k--}
+                while(nums[j] == nums[j+1]){j++}
+                k--;
+                j++;
+            }else if(0 < sum){
+                k--;
+            }else if (0 > sum){
+                j++;
             }
         }
     }
-    let answer = [];
-    
     
     return answer;
 }
